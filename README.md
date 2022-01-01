@@ -44,7 +44,7 @@ const pinned = await Client.getPinnedRepos("barbarbar338");
 console.log(pinned); // IPinnedRepo[]
 ```
 
-See https://github.com/barbarbar338/get-pinned-repos/src/types.ts for more detailed typings.
+See https://github.com/barbarbar338/get-pinned-repos/blob/main/src/types.ts for more detailed typings.
 
 # 📄 License
 

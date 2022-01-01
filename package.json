@@ -5,7 +5,7 @@
 		"url": "https://barbarbar338.fly.dev"
 	},
 	"description": "Get anyones pinned GitHub repositories easily.",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"typings": "dist",
 	"scripts": {
 		"prebuild": "rimraf dist",
