@@ -54,7 +54,7 @@ Distributed under the [MIT](https://mit-license.org/) License. See `LICENSE` for
 
 # 🧦 Contributing
 
-Fell free to use GitHub's features.
+Feel free to use GitHub's features.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/my-feature`)
@@ -69,6 +69,6 @@ Give a ⭐️ if this project helped you!
 
 # 📞 Contact
 
--   Mail: demirci.baris38@gmail.com
+-   Mail: hi@338.rocks
 -   Discord: https://discord.gg/BjEJFwh
 -   Instagram: https://www.instagram.com/ben_baris.d/
