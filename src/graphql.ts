@@ -1,5 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
-import { IPinnedRepo } from "./types";
+import { ILanguage, IPinnedRepo, IRes } from "./types";
 
 export class Client {
 	static token: string;
@@ -48,65 +48,6 @@ export class Client {
                                         }
                                     }
                                 }
-                                owner {
-                                    avatarUrl
-                                    id
-                                    login
-                                    url
-                                }
-                                licenseInfo {
-                                    description
-                                    conditions {
-                                        key
-                                        label
-                                        description
-                                    }
-                                    key
-                                    limitations {
-                                        label
-                                        key
-                                        description
-                                    }
-                                    name
-                                    nickname
-                                    permissions {
-                                        label
-                                        description
-                                        key
-                                    }
-                                    pseudoLicense
-                                    url
-                                }
-                                latestRelease {
-                                    author {
-                                        avatarUrl
-                                        bio
-                                        createdAt
-                                        email
-                                        websiteUrl
-                                        url
-                                        updatedAt
-                                        twitterUsername
-                                        status {
-                                            createdAt
-                                            emoji
-                                            expiresAt
-                                            indicatesLimitedAvailability
-                                            message
-                                        }
-                                        name
-                                        login
-                                    }
-                                    createdAt
-                                    description
-                                    isDraft
-                                    isLatest
-                                    isPrerelease
-                                    name
-                                    publishedAt
-                                    updatedAt
-                                    url
-                                }
                             }
                         }
                     }
@@ -114,45 +55,17 @@ export class Client {
             }
         `;
 
-		const res = await this.client.request(query);
+		const res = await this.client.request<IRes>(query);
 
-		const repos: IPinnedRepo[] = res.user.pinnedItems.nodes.map(
-			(node: any) => {
-				return {
-					name: node.name,
-					url: node.url,
-					stargazersCount: node.stargazerCount,
-					primaryLanguage: node.primaryLanguage,
-					description: node.description,
-					createdAt: node.createdAt,
-					forkCount: node.forkCount,
-					homepageUrl: node.homepageUrl,
-					id: node.id,
-					isArchived: node.isArchived,
-					isFork: node.isFork,
-					isInOrganization: node.isInOrganization,
-					isTemplate: node.isTemplate,
-					languages: node.languages.edges.map((edge: any) => {
-						return {
-							name: edge.node.name,
-							id: edge.node.id,
-							color: edge.node.color,
-						};
-					}),
-					licenseInfo: {
-						description: node.licenseInfo.description,
-						key: node.licenseInfo.key,
-						name: node.licenseInfo.name,
-						pseudoLicense: node.licenseInfo.pseudoLicense,
-						url: node.licenseInfo.url,
-						permissions: node.licenseInfo.permissions,
-						limitations: node.licenseInfo.limitations,
-						conditions: node.licenseInfo.conditions,
-					},
-					latestRelease: node.latestRelease,
-				} as IPinnedRepo;
-			},
-		);
+		const repos: IPinnedRepo[] = res.user.pinnedItems.nodes.map((repo) => {
+			const languages = (repo.languages as any)?.edges.map(
+				(edge: any) => edge.node,
+			) as ILanguage[];
+			delete repo.languages;
+			repo.languages = languages;
+
+			return repo;
+		});
 
 		return repos;
 	}
