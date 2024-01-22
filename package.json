@@ -5,14 +5,15 @@
 		"url": "https://338.rocks"
 	},
 	"description": "Get anyones pinned GitHub repositories easily.",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"typings": "dist",
 	"scripts": {
 		"prebuild": "rimraf dist",
 		"build": "tsc",
 		"format": "prettier --write .",
 		"test": "ts-node src",
-		"update": "taze latest -w"
+		"update": "taze latest -w",
+		"types": "jsdoc -t node_modules/tsd-jsdoc/dist -d . index.js"
 	},
 	"keywords": [
 		"pin",
@@ -28,21 +29,20 @@
 		"pinned-repository"
 	],
 	"license": "MIT",
-	"main": "dist",
+	"main": "./index.js",
+	"types": "./types.d.ts",
 	"name": "get-pinned-repos",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/barbarbar338/get-pinned-repos"
 	},
 	"devDependencies": {
-		"prettier": "^3.1.0",
-		"rimraf": "^5.0.5",
-		"taze": "^0.12.0",
-		"ts-node": "^10.9.1",
-		"typescript": "^5.2.2"
+		"jsdoc": "^4.0.2",
+		"prettier": "^3.2.4",
+		"taze": "^0.13.1",
+		"tsd-jsdoc": "^2.5.0"
 	},
 	"dependencies": {
-		"@apollo/client": "^3.8.7",
 		"graphql": "^16.8.1",
 		"graphql-request": "^6.1.0"
 	}
