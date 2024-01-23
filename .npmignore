@@ -2,3 +2,5 @@ node_modules
 .gitignore
 .npmignore
 yarn.lock
+.prettierignore
+.prettierrc
